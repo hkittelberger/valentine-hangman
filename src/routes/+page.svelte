@@ -2,7 +2,7 @@
 	let targetPhrase = "amelia, will you be my valentine?";
 	let guessedLetters = [];
 	let wrongGuesses = 0;
-	let maxWrongGuesses = 6;
+	let maxWrongGuesses = 5;
 	
 	// All 26 letters of the alphabet
 	const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
@@ -61,9 +61,15 @@
 <div class="min-h-screen bg-gradient-to-br from-pink-200 via-red-100 to-rose-200 flex flex-col items-center justify-center p-8">
 	<div class="max-w-4xl w-full bg-white rounded-3xl shadow-2xl p-8 border-4 border-pink-300">
 		
-		<!-- Wrong guesses counter -->
+		<!-- Hearts display for wrong guesses -->
 		<div class="text-center mb-6">
-			<p class="text-lg font-semibold text-pink-700">💔 Wrong guesses: {wrongGuesses} / {maxWrongGuesses}</p>
+			<div class="flex justify-center space-x-2">
+				{#each Array(maxWrongGuesses) as _, i}
+					<span class="text-4xl transition-all duration-300 {i < (maxWrongGuesses - wrongGuesses) ? 'opacity-100 scale-100' : 'opacity-30 scale-75'}">
+						❤️
+					</span>
+				{/each}
+			</div>
 		</div>
 		
 		<!-- Word display -->

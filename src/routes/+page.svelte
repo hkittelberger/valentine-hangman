@@ -1,5 +1,5 @@
 <script>
-	let targetPhrase = "this is a test";
+	let targetPhrase = "amelia, will you be my valentine?";
 	let guessedLetters = [];
 	let wrongGuesses = 0;
 	let maxWrongGuesses = 6;
@@ -10,9 +10,14 @@
 	// Split phrase into words and handle display
 	$: words = targetPhrase.toLowerCase().split(' ');
 	$: displayWords = words.map(word => 
-		word.split('').map(letter => 
-			guessedLetters.includes(letter) ? letter.toUpperCase() : '_'
-		).join(' ')
+		word.split('').map(letter => {
+			// If it's not a letter (punctuation, numbers, etc.), show it
+			if (!/[a-z]/.test(letter)) {
+				return letter.toUpperCase();
+			}
+			// If it's a letter, check if it's been guessed
+			return guessedLetters.includes(letter) ? letter.toUpperCase() : '_';
+		}).join(' ')
 	);
 	
 	// Check if letter has been guessed
@@ -23,7 +28,12 @@
 	
 	// Check win condition
 	$: hasWon = words.every(word => 
-		word.split('').every(letter => guessedLetters.includes(letter))
+		word.split('').every(letter => {
+			// Non-letters don't need to be guessed
+			if (!/[a-z]/.test(letter)) return true;
+			// Letters need to be guessed
+			return guessedLetters.includes(letter);
+		})
 	);
 	
 	// Check lose condition
@@ -50,7 +60,6 @@
 
 <div class="min-h-screen bg-gradient-to-br from-pink-200 via-red-100 to-rose-200 flex flex-col items-center justify-center p-8">
 	<div class="max-w-4xl w-full bg-white rounded-3xl shadow-2xl p-8 border-4 border-pink-300">
-		<h1 class="text-5xl font-bold text-center mb-8 text-pink-600">💕 Valentine's Hangman 💕</h1>
 		
 		<!-- Wrong guesses counter -->
 		<div class="text-center mb-6">
@@ -60,7 +69,7 @@
 		<!-- Word display -->
 		<div class="text-center mb-8 bg-gradient-to-r from-pink-50 to-red-50 p-6 rounded-2xl border-2 border-pink-200">
 			{#each displayWords as word, i}
-				<div class="inline-block mx-4">
+				<div class="block mb-2">
 					<span class="text-4xl font-mono tracking-widest text-red-600 font-bold">{word}</span>
 				</div>
 			{/each}

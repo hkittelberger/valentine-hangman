@@ -64,7 +64,7 @@
 	}
 </script>
 
-<div class="min-h-screen bg-gradient-to-br from-pink-200 via-red-100 to-rose-200 flex flex-col items-center justify-center p-8 transition-all duration-300" style="{flashRed ? 'background: #dc2626 !important; box-shadow: inset 0 0 100px rgba(220, 38, 38, 0.5) !important;' : ''}">
+<div class="min-h-screen flex flex-col items-center justify-center p-8 transition-all duration-300" style="background-image: linear-gradient(135deg, rgba(251, 207, 232, 0.4) 0%, rgba(254, 205, 211, 0.4) 50%, rgba(251, 113, 133, 0.4) 100%), url('/src/lib/background.jpg'); background-repeat: no-repeat, repeat; background-size: cover, 400px; {flashRed ? 'background: #dc2626 !important; box-shadow: inset 0 0 100px rgba(220, 38, 38, 0.5) !important;' : ''}">
 	<div class="max-w-4xl w-full bg-white rounded-3xl shadow-2xl p-8 border-4 border-pink-300">
 		
 		<!-- Title -->
@@ -109,11 +109,11 @@
 		<!-- Game status -->
 		{#if hasWon}
 			<div class="text-center mb-6">
-				<p class="text-3xl text-pink-500 font-bold">💖 You Won! Love is in the air! 💖</p>
+				<p class="text-3xl text-pink-500 font-bold">so.... whats your answer?</p>
 			</div>
 		{:else if hasLost}
 			<div class="text-center mb-6">
-				<p class="text-3xl text-red-500 font-bold">� Heartbreak! Game Over! �</p>
+				<p class="text-3xl text-red-500 font-bold">noooooooo 😥</p>
 				<p class="text-lg mt-2 text-pink-700">The answer was: <span class="font-bold uppercase text-red-600">{targetPhrase}</span></p>
 			</div>
 		{/if}
@@ -125,7 +125,7 @@
 					on:click={resetGame}
 					class="bg-gradient-to-r from-pink-400 to-red-400 hover:from-pink-500 hover:to-red-500 text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition hover:scale-105"
 				>
-					💕 Play Again 💕
+					Play Again
 				</button>
 			</div>
 		{/if}

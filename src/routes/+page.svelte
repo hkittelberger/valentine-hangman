@@ -3,6 +3,7 @@
 	let guessedLetters = [];
 	let wrongGuesses = 0;
 	let maxWrongGuesses = 5;
+	let flashRed = false;
 	
 	// All 26 letters of the alphabet
 	const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
@@ -49,6 +50,11 @@
 		
 		if (!isCorrectLetter(letter)) {
 			wrongGuesses++;
+			// Trigger red flash
+			flashRed = true;
+			setTimeout(() => {
+				flashRed = false;
+			}, 500);
 		}
 	}
 	
@@ -58,7 +64,7 @@
 	}
 </script>
 
-<div class="min-h-screen bg-gradient-to-br from-pink-200 via-red-100 to-rose-200 flex flex-col items-center justify-center p-8">
+<div class="min-h-screen bg-gradient-to-br from-pink-200 via-red-100 to-rose-200 flex flex-col items-center justify-center p-8 transition-all duration-300" style="{flashRed ? 'background: #dc2626 !important; box-shadow: inset 0 0 100px rgba(220, 38, 38, 0.5) !important;' : ''}">
 	<div class="max-w-4xl w-full bg-white rounded-3xl shadow-2xl p-8 border-4 border-pink-300">
 		
 		<!-- Title -->
@@ -70,12 +76,24 @@
 		
 		<!-- Hearts display for wrong guesses -->
 		<div class="text-center mb-6">
-			<div class="flex justify-center space-x-2">
-				{#each Array(maxWrongGuesses) as _, i}
-					<span class="text-4xl transition-all duration-300 {i < (maxWrongGuesses - wrongGuesses) ? 'opacity-100 scale-100' : 'opacity-30 scale-75'}">
-						❤️
+			<div class="flex justify-center">
+				<div class="inline-block p-2 rounded-full transition-all duration-300" style="{flashRed ? 'background: rgba(220, 38, 38, 0.3); box-shadow: 0 0 20px rgba(220, 38, 38, 0.6);' : ''}">
+					<span class="text-8xl transition-all duration-500">
+						{#if wrongGuesses === 0}
+							💕
+						{:else if wrongGuesses === 1}
+							💖
+						{:else if wrongGuesses === 2}
+							🩷
+						{:else if wrongGuesses === 3}
+							❤️‍🩹
+						{:else if wrongGuesses === 4}
+							💘
+						{:else if wrongGuesses === 5}
+							💔
+						{/if}
 					</span>
-				{/each}
+				</div>
 			</div>
 		</div>
 		

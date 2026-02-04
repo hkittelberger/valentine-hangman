@@ -52,38 +52,42 @@
 	$: gameOver = gameWon || gameLost;
 </script>
 
-<div class="game-container">
-	<h1>Valentine's Hangman</h1>
+<div class="max-w-2xl mx-auto p-8 text-center font-sans">
+	<h1 class="text-pink-500 text-4xl font-bold mb-8">Valentine's Hangman</h1>
 	
-	<div class="game-info">
-		<p>Wrong guesses: {wrongGuesses} / {maxWrongGuesses}</p>
+	<div class="mb-6">
+		<p class="text-lg">Wrong guesses: {wrongGuesses} / {maxWrongGuesses}</p>
 	</div>
 	
-	<div class="word-display">
+	<div class="text-4xl font-bold my-8 tracking-widest text-gray-800 flex justify-center gap-4 flex-wrap">
 		{#each displayWords as word, i}
-			<span class="word">{word}</span>
+			<span class="font-mono">{word}</span>
 		{/each}
 	</div>
 	
 	{#if gameWon}
-		<div class="game-message win">🎉 You won! 🎉</div>
+		<div class="text-2xl font-bold my-6 p-4 rounded-lg bg-green-100 text-green-800 border-2 border-green-200">🎉 You won! 🎉</div>
 	{:else if gameLost}
-		<div class="game-message lose">💀 Game over! The phrase was: "{targetPhrase}" 💀</div>
+		<div class="text-2xl font-bold my-6 p-4 rounded-lg bg-red-100 text-red-800 border-2 border-red-200">💀 Game over! The phrase was: "{targetPhrase}" 💀</div>
 	{/if}
 	
 	{#if gameOver}
-		<button class="reset-btn" on:click={resetGame}>Play Again</button>
+		<button 
+			class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-md text-lg transition-colors mb-8"
+			on:click={resetGame}
+		>
+			Play Again
+		</button>
 	{/if}
 	
-	<div class="alphabet">
+	<div class="mt-8">
 		{#each letterRows as row}
-			<div class="letter-row">
+			<div class="flex justify-center gap-2 mb-2">
 				{#each row as letter}
 					<button 
-						class="letter-btn"
-						class:guessed={guessedLetters.has(letter)}
-						class:correct={guessedLetters.has(letter) && targetPhrase.toLowerCase().includes(letter)}
-						class:wrong={guessedLetters.has(letter) && !targetPhrase.toLowerCase().includes(letter)}
+						class="w-12 h-12 border-2 border-gray-300 bg-white text-lg font-bold rounded-md cursor-pointer transition-all duration-200 hover:bg-gray-100 hover:border-pink-500 disabled:cursor-not-allowed
+						{guessedLetters.has(letter) && targetPhrase.toLowerCase().includes(letter) ? 'bg-green-100 border-green-500 text-green-800' : ''}
+						{guessedLetters.has(letter) && !targetPhrase.toLowerCase().includes(letter) ? 'bg-red-100 border-red-500 text-red-800' : ''}"
 						disabled={guessedLetters.has(letter) || gameOver}
 						on:click={() => guessLetter(letter)}
 					>
@@ -95,134 +99,4 @@
 	</div>
 </div>
 
-<style>
-	.game-container {
-		max-width: 600px;
-		margin: 0 auto;
-		padding: 2rem;
-		text-align: center;
-		font-family: Arial, sans-serif;
-	}
-	
-	h1 {
-		color: #ff6b9d;
-		margin-bottom: 2rem;
-	}
-	
-	.game-info {
-		margin-bottom: 1.5rem;
-		font-size: 1.1rem;
-	}
-	
-	.word-display {
-		font-size: 2.5rem;
-		font-weight: bold;
-		margin: 2rem 0;
-		letter-spacing: 0.2em;
-		color: #333;
-		display: flex;
-		justify-content: center;
-		gap: 1rem;
-		flex-wrap: wrap;
-	}
-	
-	.word {
-		font-family: 'Courier New', monospace;
-	}
-	
-	.game-message {
-		font-size: 1.5rem;
-		font-weight: bold;
-		margin: 1.5rem 0;
-		padding: 1rem;
-		border-radius: 8px;
-	}
-	
-	.win {
-		background-color: #d4edda;
-		color: #155724;
-		border: 2px solid #c3e6cb;
-	}
-	
-	.lose {
-		background-color: #f8d7da;
-		color: #721c24;
-		border: 2px solid #f5c6cb;
-	}
-	
-	.reset-btn {
-		background-color: #ff6b9d;
-		color: white;
-		border: none;
-		padding: 0.75rem 1.5rem;
-		font-size: 1.1rem;
-		border-radius: 6px;
-		cursor: pointer;
-		margin-bottom: 2rem;
-		transition: background-color 0.2s;
-	}
-	
-	.reset-btn:hover {
-		background-color: #e55a89;
-	}
-	
-	.alphabet {
-		margin-top: 2rem;
-	}
-	
-	.letter-row {
-		display: flex;
-		justify-content: center;
-		gap: 0.5rem;
-		margin-bottom: 0.5rem;
-	}
-	
-	.letter-btn {
-		width: 50px;
-		height: 50px;
-		border: 2px solid #ddd;
-		background-color: white;
-		font-size: 1.2rem;
-		font-weight: bold;
-		border-radius: 6px;
-		cursor: pointer;
-		transition: all 0.2s;
-	}
-	
-	.letter-btn:hover:not(:disabled) {
-		background-color: #f0f0f0;
-		border-color: #ff6b9d;
-	}
-	
-	.letter-btn:disabled {
-		cursor: not-allowed;
-	}
-	
-	.letter-btn.correct {
-		background-color: #d4edda;
-		border-color: #28a745;
-		color: #155724;
-	}
-	
-	.letter-btn.wrong {
-		background-color: #f8d7da;
-		border-color: #dc3545;
-		color: #721c24;
-	}
-	
-	@media (max-width: 480px) {
-		.word-display {
-			font-size: 2rem;
-		}
-		
-		.letter-btn {
-			width: 40px;
-			height: 40px;
-			font-size: 1rem;
-		}
-		
-		.letter-row {
-			gap: 0.3rem;
-		}
-	}
-</style>
+

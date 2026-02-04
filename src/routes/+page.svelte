@@ -61,6 +61,13 @@
 <div class="min-h-screen bg-gradient-to-br from-pink-200 via-red-100 to-rose-200 flex flex-col items-center justify-center p-8">
 	<div class="max-w-4xl w-full bg-white rounded-3xl shadow-2xl p-8 border-4 border-pink-300">
 		
+		<!-- Title -->
+		<div class="text-center mb-8">
+			<h1 class="text-6xl font-bold text-transparent bg-gradient-to-r from-pink-500 via-red-500 to-pink-600 bg-clip-text mb-2 leading-tight py-2" style="font-family: 'Brush Script MT', cursive;">
+				Hangman
+			</h1>
+		</div>
+		
 		<!-- Hearts display for wrong guesses -->
 		<div class="text-center mb-6">
 			<div class="flex justify-center space-x-2">

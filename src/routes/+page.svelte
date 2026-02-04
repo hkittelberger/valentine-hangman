@@ -64,21 +64,21 @@
 	}
 </script>
 
-<div class="min-h-screen flex flex-col items-center justify-center p-8 transition-all duration-300" style="background-image: linear-gradient(135deg, rgba(251, 207, 232, 0.4) 0%, rgba(254, 205, 211, 0.4) 50%, rgba(251, 113, 133, 0.4) 100%), url('/background.jpg'); background-repeat: no-repeat, repeat; background-size: cover, 400px; {flashRed ? 'background: #dc2626 !important; box-shadow: inset 0 0 100px rgba(220, 38, 38, 0.5) !important;' : ''}">
-	<div class="max-w-4xl w-full bg-white rounded-3xl shadow-2xl p-8 border-4 border-pink-300">
+<div class="min-h-screen flex flex-col items-center justify-center p-4 sm:p-8 transition-all duration-300 bg-[length:cover,200px_200px] sm:bg-[length:cover,400px_400px]" style="background-image: linear-gradient(135deg, rgba(251, 207, 232, 0.4) 0%, rgba(254, 205, 211, 0.4) 50%, rgba(251, 113, 133, 0.4) 100%), url('/background.jpg'); background-repeat: no-repeat, repeat; {flashRed ? 'background: #dc2626 !important; box-shadow: inset 0 0 100px rgba(220, 38, 38, 0.5) !important;' : ''}">
+	<div class="max-w-4xl w-full max-w-md sm:max-w-4xl bg-white rounded-2xl sm:rounded-3xl shadow-2xl p-4 sm:p-8 border-2 sm:border-4 border-pink-300">
 		
 		<!-- Title -->
-		<div class="text-center mb-8">
-			<h1 class="text-6xl font-bold text-transparent bg-gradient-to-r from-pink-500 via-red-500 to-pink-600 bg-clip-text mb-2 leading-tight py-2" style="font-family: 'Brush Script MT', cursive;">
+		<div class="text-center mb-4 sm:mb-8">
+			<h1 class="text-4xl sm:text-6xl font-bold text-transparent bg-gradient-to-r from-pink-500 via-red-500 to-pink-600 bg-clip-text mb-2 leading-tight py-2" style="font-family: 'Brush Script MT', cursive;">
 				Hangman
 			</h1>
 		</div>
 		
 		<!-- Hearts display for wrong guesses -->
-		<div class="text-center mb-6">
+		<div class="text-center mb-4 sm:mb-6">
 			<div class="flex justify-center">
 				<div class="inline-block p-2 rounded-full transition-all duration-300" style="{flashRed ? 'background: rgba(220, 38, 38, 0.3); box-shadow: 0 0 20px rgba(220, 38, 38, 0.6);' : ''}">
-					<span class="text-8xl transition-all duration-500">
+					<span class="text-6xl sm:text-8xl transition-all duration-500">
 						{#if wrongGuesses === 0}
 							💕
 						{:else if wrongGuesses === 1}
@@ -98,47 +98,47 @@
 		</div>
 		
 		<!-- Word display -->
-		<div class="text-center mb-8 bg-gradient-to-r from-pink-50 to-red-50 p-6 rounded-2xl border-2 border-pink-200">
+		<div class="text-center mb-4 sm:mb-8 bg-gradient-to-r from-pink-50 to-red-50 p-3 sm:p-6 rounded-xl sm:rounded-2xl border-2 border-pink-200">
 			{#each displayWords as word, i}
-				<div class="block mb-2">
-					<span class="text-4xl font-mono tracking-widest text-red-600 font-bold">{word}</span>
+				<div class="block mb-1 sm:mb-2">
+					<span class="text-xl sm:text-5xl font-mono tracking-wide sm:tracking-widest text-red-600 font-bold">{word}</span>
 				</div>
 			{/each}
 		</div>
 		
 		<!-- Game status -->
 		{#if hasWon}
-			<div class="text-center mb-6">
-				<p class="text-3xl text-pink-500 font-bold">so.... whats your answer?</p>
+			<div class="text-center mb-4 sm:mb-6">
+				<p class="text-xl sm:text-3xl text-pink-500 font-bold">so.... whats your answer?</p>
 			</div>
 		{:else if hasLost}
-			<div class="text-center mb-6">
-				<p class="text-3xl text-red-500 font-bold">noooooooo 😥</p>
-				<p class="text-lg mt-2 text-pink-700">The answer was: <span class="font-bold uppercase text-red-600">{targetPhrase}</span></p>
+			<div class="text-center mb-4 sm:mb-6">
+				<p class="text-xl sm:text-3xl text-red-500 font-bold">noooooooo 😥</p>
+				<p class="text-sm sm:text-lg mt-2 text-pink-700">The answer was: <span class="font-bold uppercase text-red-600">{targetPhrase}</span></p>
 			</div>
 		{/if}
 		
 		<!-- Reset button -->
 		{#if gameOver}
-			<div class="text-center mb-6">
+			<div class="text-center mb-4 sm:mb-6">
 				<button 
 					on:click={resetGame}
-					class="bg-gradient-to-r from-pink-400 to-red-400 hover:from-pink-500 hover:to-red-500 text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition hover:scale-105"
+					class="bg-gradient-to-r from-pink-400 to-red-400 hover:from-pink-500 hover:to-red-500 text-white font-bold py-2 px-4 sm:py-3 sm:px-6 rounded-full shadow-lg transform transition hover:scale-105 text-sm sm:text-base"
 				>
 					Play Again
 				</button>
 			</div>
 		{/if}
 		
-		<!-- Alphabet buttons in 3 rows -->
-		<div class="flex flex-col items-center space-y-2">
-			<!-- First row: Q-P (10 letters) -->
-			<div class="flex flex-wrap justify-center gap-2">
-				{#each alphabet.slice(0, 10) as letter}
+		<!-- Alphabet buttons in 4 balanced rows -->
+		<div class="flex flex-col items-center space-y-1 sm:space-y-2">
+			<!-- First row: A-F (6 letters) -->
+			<div class="flex flex-wrap justify-center gap-1 sm:gap-2">
+				{#each alphabet.slice(0, 6) as letter}
 					<button
 						on:click={() => guessLetter(letter)}
 						disabled={isLetterGuessed(letter) || gameOver}
-						class="w-12 h-12 rounded-full border-3 font-bold text-lg transition-all duration-200 shadow-md
+						class="w-9 h-9 sm:w-12 sm:h-12 rounded-full border-2 sm:border-3 font-bold text-sm sm:text-lg transition-all duration-200 shadow-md
 							{isLetterGuessed(letter) 
 								? isCorrectLetter(letter) 
 									? 'bg-gradient-to-r from-pink-400 to-red-400 text-white border-pink-500 shadow-lg' 
@@ -153,13 +153,13 @@
 				{/each}
 			</div>
 			
-			<!-- Second row: A-L (9 letters) -->
-			<div class="flex flex-wrap justify-center gap-2">
-				{#each alphabet.slice(10, 19) as letter}
+			<!-- Second row: G-L (6 letters) -->
+			<div class="flex flex-wrap justify-center gap-1 sm:gap-2">
+				{#each alphabet.slice(6, 12) as letter}
 					<button
 						on:click={() => guessLetter(letter)}
 						disabled={isLetterGuessed(letter) || gameOver}
-						class="w-12 h-12 rounded-full border-3 font-bold text-lg transition-all duration-200 shadow-md
+						class="w-9 h-9 sm:w-12 sm:h-12 rounded-full border-2 sm:border-3 font-bold text-sm sm:text-lg transition-all duration-200 shadow-md
 							{isLetterGuessed(letter) 
 								? isCorrectLetter(letter) 
 									? 'bg-gradient-to-r from-pink-400 to-red-400 text-white border-pink-500 shadow-lg' 
@@ -174,13 +174,34 @@
 				{/each}
 			</div>
 			
-			<!-- Third row: Z-M (7 letters) -->
-			<div class="flex flex-wrap justify-center gap-2">
+			<!-- Third row: M-S (7 letters) -->
+			<div class="flex flex-wrap justify-center gap-1 sm:gap-2">
+				{#each alphabet.slice(12, 19) as letter}
+					<button
+						on:click={() => guessLetter(letter)}
+						disabled={isLetterGuessed(letter) || gameOver}
+						class="w-9 h-9 sm:w-12 sm:h-12 rounded-full border-2 sm:border-3 font-bold text-sm sm:text-lg transition-all duration-200 shadow-md
+							{isLetterGuessed(letter) 
+								? isCorrectLetter(letter) 
+									? 'bg-gradient-to-r from-pink-400 to-red-400 text-white border-pink-500 shadow-lg' 
+									: 'bg-gradient-to-r from-gray-400 to-gray-500 text-white border-gray-500'
+								: gameOver
+									? 'bg-gray-200 text-gray-400 border-gray-300 cursor-not-allowed'
+									: 'bg-gradient-to-r from-pink-100 to-red-100 hover:from-pink-200 hover:to-red-200 border-pink-300 hover:border-pink-400 cursor-pointer text-pink-700 hover:shadow-lg transform hover:scale-110'
+							}"
+					>
+						{letter.toUpperCase()}
+					</button>
+				{/each}
+			</div>
+			
+			<!-- Fourth row: T-Z (7 letters) -->
+			<div class="flex flex-wrap justify-center gap-1 sm:gap-2">
 				{#each alphabet.slice(19, 26) as letter}
 					<button
 						on:click={() => guessLetter(letter)}
 						disabled={isLetterGuessed(letter) || gameOver}
-						class="w-12 h-12 rounded-full border-3 font-bold text-lg transition-all duration-200 shadow-md
+						class="w-9 h-9 sm:w-12 sm:h-12 rounded-full border-2 sm:border-3 font-bold text-sm sm:text-lg transition-all duration-200 shadow-md
 							{isLetterGuessed(letter) 
 								? isCorrectLetter(letter) 
 									? 'bg-gradient-to-r from-pink-400 to-red-400 text-white border-pink-500 shadow-lg' 

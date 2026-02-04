@@ -48,20 +48,20 @@
 	}
 </script>
 
-<div class="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-8">
-	<div class="max-w-4xl w-full bg-white rounded-lg shadow-lg p-8">
-		<h1 class="text-4xl font-bold text-center mb-8 text-gray-800">Hangman Game</h1>
+<div class="min-h-screen bg-gradient-to-br from-pink-200 via-red-100 to-rose-200 flex flex-col items-center justify-center p-8">
+	<div class="max-w-4xl w-full bg-white rounded-3xl shadow-2xl p-8 border-4 border-pink-300">
+		<h1 class="text-5xl font-bold text-center mb-8 text-pink-600">💕 Valentine's Hangman 💕</h1>
 		
 		<!-- Wrong guesses counter -->
 		<div class="text-center mb-6">
-			<p class="text-lg">Wrong guesses: {wrongGuesses} / {maxWrongGuesses}</p>
+			<p class="text-lg font-semibold text-pink-700">💔 Wrong guesses: {wrongGuesses} / {maxWrongGuesses}</p>
 		</div>
 		
 		<!-- Word display -->
-		<div class="text-center mb-8">
+		<div class="text-center mb-8 bg-gradient-to-r from-pink-50 to-red-50 p-6 rounded-2xl border-2 border-pink-200">
 			{#each displayWords as word, i}
 				<div class="inline-block mx-4">
-					<span class="text-3xl font-mono tracking-widest">{word}</span>
+					<span class="text-4xl font-mono tracking-widest text-red-600 font-bold">{word}</span>
 				</div>
 			{/each}
 		</div>
@@ -69,12 +69,12 @@
 		<!-- Game status -->
 		{#if hasWon}
 			<div class="text-center mb-6">
-				<p class="text-2xl text-green-600 font-bold">🎉 You Won! 🎉</p>
+				<p class="text-3xl text-pink-500 font-bold">💖 You Won! Love is in the air! 💖</p>
 			</div>
 		{:else if hasLost}
 			<div class="text-center mb-6">
-				<p class="text-2xl text-red-600 font-bold">💀 Game Over! 💀</p>
-				<p class="text-lg mt-2">The answer was: <span class="font-bold uppercase">{targetPhrase}</span></p>
+				<p class="text-3xl text-red-500 font-bold">� Heartbreak! Game Over! �</p>
+				<p class="text-lg mt-2 text-pink-700">The answer was: <span class="font-bold uppercase text-red-600">{targetPhrase}</span></p>
 			</div>
 		{/if}
 		
@@ -83,9 +83,9 @@
 			<div class="text-center mb-6">
 				<button 
 					on:click={resetGame}
-					class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+					class="bg-gradient-to-r from-pink-400 to-red-400 hover:from-pink-500 hover:to-red-500 text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition hover:scale-105"
 				>
-					Play Again
+					💕 Play Again 💕
 				</button>
 			</div>
 		{/if}
@@ -98,14 +98,14 @@
 					<button
 						on:click={() => guessLetter(letter)}
 						disabled={isLetterGuessed(letter) || gameOver}
-						class="w-10 h-10 rounded border-2 font-bold text-lg transition-colors
+						class="w-12 h-12 rounded-full border-3 font-bold text-lg transition-all duration-200 shadow-md
 							{isLetterGuessed(letter) 
 								? isCorrectLetter(letter) 
-									? 'bg-green-500 text-white border-green-500' 
-									: 'bg-red-500 text-white border-red-500'
+									? 'bg-gradient-to-r from-pink-400 to-red-400 text-white border-pink-500 shadow-lg' 
+									: 'bg-gradient-to-r from-gray-400 to-gray-500 text-white border-gray-500'
 								: gameOver
-									? 'bg-gray-300 text-gray-500 border-gray-300 cursor-not-allowed'
-									: 'bg-white hover:bg-gray-100 border-gray-300 hover:border-gray-400 cursor-pointer'
+									? 'bg-gray-200 text-gray-400 border-gray-300 cursor-not-allowed'
+									: 'bg-gradient-to-r from-pink-100 to-red-100 hover:from-pink-200 hover:to-red-200 border-pink-300 hover:border-pink-400 cursor-pointer text-pink-700 hover:shadow-lg transform hover:scale-110'
 							}"
 					>
 						{letter.toUpperCase()}
@@ -119,14 +119,14 @@
 					<button
 						on:click={() => guessLetter(letter)}
 						disabled={isLetterGuessed(letter) || gameOver}
-						class="w-10 h-10 rounded border-2 font-bold text-lg transition-colors
+						class="w-12 h-12 rounded-full border-3 font-bold text-lg transition-all duration-200 shadow-md
 							{isLetterGuessed(letter) 
 								? isCorrectLetter(letter) 
-									? 'bg-green-500 text-white border-green-500' 
-									: 'bg-red-500 text-white border-red-500'
+									? 'bg-gradient-to-r from-pink-400 to-red-400 text-white border-pink-500 shadow-lg' 
+									: 'bg-gradient-to-r from-gray-400 to-gray-500 text-white border-gray-500'
 								: gameOver
-									? 'bg-gray-300 text-gray-500 border-gray-300 cursor-not-allowed'
-									: 'bg-white hover:bg-gray-100 border-gray-300 hover:border-gray-400 cursor-pointer'
+									? 'bg-gray-200 text-gray-400 border-gray-300 cursor-not-allowed'
+									: 'bg-gradient-to-r from-pink-100 to-red-100 hover:from-pink-200 hover:to-red-200 border-pink-300 hover:border-pink-400 cursor-pointer text-pink-700 hover:shadow-lg transform hover:scale-110'
 							}"
 					>
 						{letter.toUpperCase()}
@@ -140,14 +140,14 @@
 					<button
 						on:click={() => guessLetter(letter)}
 						disabled={isLetterGuessed(letter) || gameOver}
-						class="w-10 h-10 rounded border-2 font-bold text-lg transition-colors
+						class="w-12 h-12 rounded-full border-3 font-bold text-lg transition-all duration-200 shadow-md
 							{isLetterGuessed(letter) 
 								? isCorrectLetter(letter) 
-									? 'bg-green-500 text-white border-green-500' 
-									: 'bg-red-500 text-white border-red-500'
+									? 'bg-gradient-to-r from-pink-400 to-red-400 text-white border-pink-500 shadow-lg' 
+									: 'bg-gradient-to-r from-gray-400 to-gray-500 text-white border-gray-500'
 								: gameOver
-									? 'bg-gray-300 text-gray-500 border-gray-300 cursor-not-allowed'
-									: 'bg-white hover:bg-gray-100 border-gray-300 hover:border-gray-400 cursor-pointer'
+									? 'bg-gray-200 text-gray-400 border-gray-300 cursor-not-allowed'
+									: 'bg-gradient-to-r from-pink-100 to-red-100 hover:from-pink-200 hover:to-red-200 border-pink-300 hover:border-pink-400 cursor-pointer text-pink-700 hover:shadow-lg transform hover:scale-110'
 							}"
 					>
 						{letter.toUpperCase()}

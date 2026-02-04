@@ -64,7 +64,7 @@
 	}
 </script>
 
-<div class="min-h-screen flex flex-col items-center justify-center p-8 transition-all duration-300" style="background-image: linear-gradient(135deg, rgba(251, 207, 232, 0.4) 0%, rgba(254, 205, 211, 0.4) 50%, rgba(251, 113, 133, 0.4) 100%), url('/src/lib/background.jpg'); background-repeat: no-repeat, repeat; background-size: cover, 400px; {flashRed ? 'background: #dc2626 !important; box-shadow: inset 0 0 100px rgba(220, 38, 38, 0.5) !important;' : ''}">
+<div class="min-h-screen flex flex-col items-center justify-center p-8 transition-all duration-300" style="background-image: linear-gradient(135deg, rgba(251, 207, 232, 0.4) 0%, rgba(254, 205, 211, 0.4) 50%, rgba(251, 113, 133, 0.4) 100%), url('/background.jpg'); background-repeat: no-repeat, repeat; background-size: cover, 400px; {flashRed ? 'background: #dc2626 !important; box-shadow: inset 0 0 100px rgba(220, 38, 38, 0.5) !important;' : ''}">
 	<div class="max-w-4xl w-full bg-white rounded-3xl shadow-2xl p-8 border-4 border-pink-300">
 		
 		<!-- Title -->
